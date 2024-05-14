@@ -1,0 +1,14 @@
+{
+  "name": "knowledge-base-app",
+  "version": "1.0.0",
+  "description": "This is a personal knowledge base application that will help organize and store useful information, such as code snippets, tutorials, reference materials and programming tips.",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Mansur Mansur",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.0.3"
+  }
+}
