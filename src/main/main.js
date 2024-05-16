@@ -1,5 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
+const { ipcMain } = require('electron')
+const {database} = require('../db/connection')
 const path = require('path')
 
 function createWindow() {
@@ -26,6 +28,9 @@ app.whenReady().then(() => {
     app.on('activate', function () {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
+
+    //print database schema
+    console.log(database.schema)
 
     app.on('window-all-closed', function () {
         if (process.platform !== 'darwin') app.quit()

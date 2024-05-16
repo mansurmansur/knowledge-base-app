@@ -10,5 +10,10 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^30.0.3"
+  },
+  "dependencies": {
+    "sqlite-electron": "^3.0.5",
+    "sqlite3": "^5.1.7",
+    "uuid": "^9.0.1"
   }
 }
