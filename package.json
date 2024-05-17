@@ -2,7 +2,7 @@
   "name": "knowledge-base-app",
   "version": "1.0.0",
   "description": "This is a personal knowledge base application that will help organize and store useful information, such as code snippets, tutorials, reference materials and programming tips.",
-  "main": "src/main/main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron ."
   },
@@ -12,7 +12,7 @@
     "electron": "^30.0.3"
   },
   "dependencies": {
-    "sqlite-electron": "^3.0.5",
+    "electronmon": "^2.0.3",
     "sqlite3": "^5.1.7",
     "uuid": "^9.0.1"
   }

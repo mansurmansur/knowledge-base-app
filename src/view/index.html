@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../asset/style.css">
     <title>Knowledge base Application</title>
 </head>
 <body>
@@ -18,9 +18,10 @@
             </div>
 
             <div class="search">
-                <input type="text" id="search" placeholder="Search articles...">
+                <input type="text" id="search" placeholder="Search articles..." value="">
             </div>
         </div>
+        <!-- add article modal -->
         <div class="add-article-modal modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -69,6 +70,6 @@
             <p>&copy; 2022 InfoHive. All rights reserved.</p>
         </div>
     </div>
-    <script src="renderer.js"></script>
+    <script src="../renderer.mjs"></script>
 </body>
 </html>
