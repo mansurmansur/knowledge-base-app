@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net;">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style.css">
     <title>Knowledge base Application</title>
 </head>
@@ -14,62 +15,21 @@
                 <div class="logo">
                     InfoHive
                 </div>
+                <div class="search">
+                    <input type="text" id="search" placeholder="Search articles..." value="">
+                </div>
                 <button id="add-new-article">Add new article</button>
-            </div>
-
-            <div class="search">
-                <input type="text" id="search" placeholder="Search articles..." value="">
-            </div>
-        </div>
-        <!-- add article modal -->
-        <div class="add-article-modal modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Add new article</h2>
-                <form id="add-article-form">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" name="title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="category">Category</label>
-                        <select id="category" name="category" required>
-                            <option value="General">General</option>
-                            <option value="Technology">Technology</option>
-                            <option value="Science">Science</option>
-                            <option value="Health">Health</option>
-                            <option value="Sports">Sports</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="content">Content</label>
-                        <textarea id="content" name="content" required></textarea>
-                    </div>
-                    <button type="submit">Add article</button>
-                </form>
             </div>
         </div>
         <div class="main">
-            <div class="articles">
-                <div class="article">
-                    <span class="title">Advanced Programming Concepts</span> <span>Test</span> <span>2021-01-01</span> <span>View</span> 
-                </div>
-                <div class="article">
-                    <span class="title">Advanced Programming Concepts</span> <span>Test</span> <span>2021-01-01</span> <span>View</span> 
-                </div>
-                <div class="article">
-                    <span class="title">Advanced Programming Concepts</span> <span>Test</span> <span>2021-01-01</span> <span>View</span> 
-                </div>
-                <div class="article">
-                    <span class="title">Advanced Programming Concepts</span> <span>Test</span> <span>2021-01-01</span> <span>View</span> 
-                </div>
-            </div>
+
         </div>
         <div class="footer">
             <p>InfoHive</p>
             <p>&copy; 2022 InfoHive. All rights reserved.</p>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
     <script src="../renderer.mjs"></script>
 </body>
 </html>

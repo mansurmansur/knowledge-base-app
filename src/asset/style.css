@@ -11,6 +11,8 @@ body {
     font-size: 16px;
     background-color: #23272f;
     color: #fff;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 /* header styles */
@@ -26,7 +28,7 @@ body {
 .header-content {
     background: #1c2128;
     display: flex;
-    height: 80px;
+    height: 60px;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1.5px solid #333;
@@ -36,25 +38,28 @@ body {
 
 .logo {
     family: 'Roboto Flex', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 500;
+}
+
+.logo:hover {
+    cursor: pointer;
 }
 
 .header-content button {
     background: transparent;
     color: #a7a7a7;
     border: 1px solid #fff;
-    padding: 5px 10px;
+    padding: 10px 10px;
     border-radius: 5px;
     cursor: pointer;
-    height: 40px;
 }
 .header-content button:hover {
     background: #fff;
     color: #333;
 }
 .search {
-    width: 100%;
+    height: 35px;
     max-width: 400px;
     display: flex;
     align-items: center;
@@ -72,41 +77,28 @@ body {
     border-radius: 5px;
 }
 
-/* add article modal style */
-.add-article-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
+/* add article page style*/
+.add-article{
+    display: flex;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
     justify-content: center;
     align-items: center;
 }
-.modal-content {
+.add-article-content {
     background: #fff;
-    width: 80%;
+    width: 90%;
     max-width: 600px;
-    height: 90%;
-    margin: 40px auto;
+    height: 70%;
+    margin: 10px auto;
     padding: 20px;
     border-radius: 5px;
     position: relative;
     color: #333;
 }
-.close {
-    font-size: 1.7rem;
-    color: #333;
-    fomt-weight: 800;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    cursor: pointer;
-}
-.add-article-modal h2 {
+.add-article h2 {
     margin-bottom: 20px;
+    font-size: 1.25rem;
 }
 .add-article-form{
     display: flex;
@@ -119,13 +111,16 @@ body {
     width: 100%;
     margin-bottom: 20px;
 }
-textarea {
+#content {
     width: 100%;
-    height: 250px;
+    height: 200px;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #333;
+    border-radius: 0 0 5px 5px;
+    border: 1px solid #a7a7a7;
     outline: none;
+}
+.ql-toolbar {
+    border-radius: 5px 5px 0 0;
 }
 
 .form-group input {
@@ -139,6 +134,7 @@ textarea {
     margin-bottom: 10px;
     font-weight: 500;
     color: #411216;
+    font-size: .9rem;
 }
 .form-group select{
     padding: 10px;
@@ -164,11 +160,25 @@ button[type="submit"]:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
+    height: calc(100% - 165px);
 }
-.articles {
+/* home */
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     width: 100%;
-    padding: 0 10%;
+}
+.home-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 10px 10%;
 }
 .article {
     background: #1c2128;
@@ -177,18 +187,30 @@ button[type="submit"]:hover {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1.5px solid #333;
-}
-.article span {
-    font-size: .8rem;
-    font-weight: 400;
-    color: #a7a7a7;
-}
-.article:hover {
-    background: #333;
+    width: 100%;
 }
 
-.article:hover + span{
-    color: #fff;
+.article .id{
+    font-size: .7rem;
+    color: #a7a7a7;
+}
+.article .title {
+    font-size: .8rem;
+    color: #a7a7a7;
+}
+.article .created-date{
+    font-size: .7rem;
+    color: #a7a7a7;
+
+}
+.view-button{
+    background: transparent;
+    color: #a7a7a7;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
 }
 
 /* footer style */
@@ -201,8 +223,58 @@ button[type="submit"]:hover {
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: 70px;
     border-top: 1.5px solid #333;
 }
 
+/* Display Article */
+.display-article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.display-article-content {
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    height: 70%;
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    color: #333;
+}
+.display-article h2 {
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+}
 
+
+
+/* screen size */
+@media screen and (max-width: 768px) {
+    .header-content {
+        padding: 0 5%;
+    }
+    .search {
+        width: 50%;
+    }
+    .add-article-content {
+        height: 90%;
+    }
+    .add-article-form input {
+        width: 100%;
+    }
+    .form-group input {
+        width: 100%;
+    }
+    .form-group select {
+        width: 100%;
+    }
+    .articles {
+        padding: 0 5%;
+    }
+}
 

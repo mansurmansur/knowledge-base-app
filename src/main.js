@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
+const {v4: uuid} = require('uuid');
 const Database = require('./database.js');
 const path = require('path')
 
@@ -18,6 +19,9 @@ function createWindow() {
     
     // and load the index.html of the app.
     mainWindow.loadFile('src/view/index.html')
+
+    // remove menu
+    mainWindow.setMenu(null);
     
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
@@ -40,12 +44,49 @@ app.whenReady().then(() => {
     // IPC communication for database operations with knowledgebase.js file
     // TODO: Implement complete search functionality & rest of the database operations
     ipcMain.on('database-operation', (event, args) => {
-        const { operation, data } = args;
+        const { operation, data, tags} = args;
         switch (operation) {
             case 'insert':
                 database.run('INSERT INTO knowledge (id, title, content) VALUES (?, ?, ?)', data)
                     .then((result) => {
                         event.reply('database-operation-reply', { operation, result });
+                        
+                        // check if the tags exist
+                        tags.forEach(tag => {
+                            database.get('SELECT * FROM tags WHERE name = ?', [tag])
+                                .then((result) => {
+                                    if (result) {
+                                        // tag exists
+                                        database.run('INSERT INTO knowledge_tags (knowledge_id, tag_id) VALUES (?, ?)', [data[0], result.id])
+                                            .then((result) => {
+                                                console.log('Tag added to knowledge: '+result);
+                                            })
+                                            .catch((err) => {
+                                                console.error('Error adding tag to knowledge:', err);
+                                            });
+                                    } else {
+                                        // tag does not exist
+                                        const id = uuid();
+                                        database.run('INSERT INTO tags (id, name) VALUES (?, ?)', [id, tag])
+                                            .then((result) => {
+                                                console.log('Tag added');
+                                                database.run('INSERT INTO knowledge_tags (knowledge_id, tag_id) VALUES (?, ?)', [data[0], id])
+                                                    .then((result) => {
+                                                        console.log('Tag added to knowledge', result);
+                                                    })
+                                                    .catch((err) => {
+                                                        console.error('Error adding tag to knowledge:', err);
+                                                    });
+                                            })
+                                            .catch((err) => {
+                                                console.error('Error adding tag:', err);
+                                            });
+                                    }
+                                })
+                                .catch((err) => {
+                                    console.error('Error getting tag:', err);
+                                });
+                        });
                     })
                     .catch((err) => {
                         event.reply('database-operation-reply', { operation, error: err });
@@ -62,6 +103,17 @@ app.whenReady().then(() => {
                 break;
             default:
                 event.reply('database-operation-reply', { operation, error: 'Unknown operation' });
+        }
+    });
+
+    // IPC communication for invoke operations for request-reply type of communication
+    ipcMain.handle('invoke-operation', async (event, args) => {
+        const { operation} = args;
+        switch (operation) {
+            case 'select':
+                return database.all('SELECT * FROM knowledge')
+            default:
+                return { operation, error: 'Unknown operation' };
         }
     });
 
