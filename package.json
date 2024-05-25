@@ -13,7 +13,10 @@
   },
   "dependencies": {
     "electronmon": "^2.0.3",
+<<<<<<< HEAD
     "quill": "^2.0.2",
+=======
+>>>>>>> ca7ec1c2e5b79ea1013339f0d96f46bde52ce4f2
     "sqlite3": "^5.1.7",
     "uuid": "^9.0.1"
   }
