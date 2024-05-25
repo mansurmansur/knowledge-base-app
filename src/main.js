@@ -1,10 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
-<<<<<<< HEAD
 const {v4: uuid} = require('uuid');
-=======
->>>>>>> ca7ec1c2e5b79ea1013339f0d96f46bde52ce4f2
 const Database = require('./database.js');
 const path = require('path')
 
@@ -22,12 +19,9 @@ function createWindow() {
     
     // and load the index.html of the app.
     mainWindow.loadFile('src/view/index.html')
-<<<<<<< HEAD
 
     // remove menu
     mainWindow.setMenu(null);
-=======
->>>>>>> ca7ec1c2e5b79ea1013339f0d96f46bde52ce4f2
     
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
@@ -50,17 +44,15 @@ app.whenReady().then(() => {
     // IPC communication for database operations with knowledgebase.js file
     // TODO: Implement complete search functionality & rest of the database operations
     ipcMain.on('database-operation', (event, args) => {
-<<<<<<< HEAD
+
         const { operation, data, tags} = args;
-=======
-        const { operation, data } = args;
->>>>>>> ca7ec1c2e5b79ea1013339f0d96f46bde52ce4f2
+
+
         switch (operation) {
             case 'insert':
                 database.run('INSERT INTO knowledge (id, title, content) VALUES (?, ?, ?)', data)
                     .then((result) => {
                         event.reply('database-operation-reply', { operation, result });
-<<<<<<< HEAD
                         
                         // check if the tags exist
                         tags.forEach(tag => {
@@ -98,8 +90,6 @@ app.whenReady().then(() => {
                                     console.error('Error getting tag:', err);
                                 });
                         });
-=======
->>>>>>> ca7ec1c2e5b79ea1013339f0d96f46bde52ce4f2
                     })
                     .catch((err) => {
                         event.reply('database-operation-reply', { operation, error: err });
@@ -119,7 +109,6 @@ app.whenReady().then(() => {
         }
     });
 
-<<<<<<< HEAD
     // IPC communication for invoke operations for request-reply type of communication
     ipcMain.handle('invoke-operation', async (event, args) => {
         const { operation} = args;
@@ -131,8 +120,6 @@ app.whenReady().then(() => {
         }
     });
 
-=======
->>>>>>> ca7ec1c2e5b79ea1013339f0d96f46bde52ce4f2
     app.on('window-all-closed', function () {
         if (process.platform !== 'darwin') app.quit()
     })

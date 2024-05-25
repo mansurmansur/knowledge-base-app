@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 // all the elements needed
 const addBtn = document.querySelector('#add-new-article');
 const searchInput = document.querySelector('#search');
@@ -32,37 +30,9 @@ addBtn.addEventListener('click', async () => {
 // home button
 homeBtn.addEventListener('click', () => {
     loadPage('home');
-=======
-// all the elements needed
-const closeBtn = document.querySelector('.close');
-const modal = document.querySelector('.add-article-modal');
-const addBtn = document.querySelector('#add-new-article');
-const addArticleForm = document.querySelector('#add-article-form');
-const searchInput = document.querySelector('#search');
-
-//open the modal window when the add button is clicked
-addBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-
-    // get data when submit button is clicked
-    addArticleForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const title = document.querySelector('#title').value;
-        const content = document.querySelector('#content').value;
-        console.log(title, content);
-        // addArticle(title, content);
-        console.log(window.api)
-        const id = window.api.uuid;
-        window.api.send('database-operation', { operation: 'insert', data: [id, title, content] });
-        modal.style.display = 'none';
-    });
 });
 
-// close the modal window when the close button is clicked
-closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
->>>>>>> ca7ec1c2e5b79ea1013339f0d96f46bde52ce4f2
-});
+
 
 // listen for enter key press and get the data in input field
 // TODO: implement complete search functionality
@@ -81,13 +51,6 @@ searchInput.addEventListener('keyup', async(e) => {
         }
     }
 });
-
-// listen for the database operation reply
-window.api.receive('database-operation-reply', (data) => {
-    console.log('Database operation reply:', data);
-<<<<<<< HEAD
-});
-
 
 // Load Add Article 
 const loadAddArticle = () => {
@@ -128,6 +91,7 @@ const loadAddArticle = () => {
 }
 
 // Load Display Article
+// TODO: implement display article functionality
 const loadDisplayArticle = (article) => {
     console.log('Display Article Page');
     // get display article page
@@ -147,6 +111,7 @@ const loadDisplayArticle = (article) => {
 
 
 // Load Search Result
+// TODO: implement search functionality
 const loadSearch = () => {
     console.log('Search Page');
     // get search page
@@ -174,9 +139,6 @@ const loadhome = () => {
             } catch (error) {
                 console.error(error);
             }
-            // const articles = fetchAllArticles();
-            // console.log(articles.PromiseResult);
-            // displayAllArticles(articles);
         })
         .catch(error => console.error(error));
 }
@@ -195,7 +157,7 @@ const fetchAllArticles = async () => {
 // display all articles
 const displayAllArticles = (articles) => {
     const articlesContainer = document.querySelector('.home-content');
-    console.log(articles);
+
     articles.forEach(article => {
         const articleDiv = document.createElement('div');
         articleDiv.classList.add('article');
@@ -212,6 +174,4 @@ const displayAllArticles = (articles) => {
 // initialize app with home page
 document.addEventListener('DOMContentLoaded', () => {
     loadPage('home');
-=======
->>>>>>> ca7ec1c2e5b79ea1013339f0d96f46bde52ce4f2
 });
